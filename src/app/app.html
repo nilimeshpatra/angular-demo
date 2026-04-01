@@ -1,0 +1,88 @@
+<main class="landing-page">
+  <nav class="navbar">
+    <div class="logo" (click)="navigateTo('home', $event)">
+      {{ title() }}
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" [class.active]="activePage() === 'features'" (click)="navigateTo('features', $event)">Features</a></li>
+      <li><a href="#" [class.active]="activePage() === 'showcase'" (click)="navigateTo('showcase', $event)">Showcase</a></li>
+      <li><a href="#" [class.active]="activePage() === 'docs'" (click)="navigateTo('docs', $event)">Documentation</a></li>
+    </ul>
+  </nav>
+
+  @switch (activePage()) {
+    @case ('home') {
+      <section class="hero fade-in">
+        <div class="hero-content">
+          <div class="badge">v1.0 is live</div>
+          <h1>{{ headline() }}</h1>
+          <p>{{ subtext() }}</p>
+          
+          <div class="cta-group">
+            <button class="primary-btn">Get Started</button>
+            <button class="secondary-btn">
+              View Repository
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="glow-orb"></div>
+          <div class="glass-card"></div>
+        </div>
+      </section>
+    }
+    
+    @case ('features') {
+      <section class="inner-page fade-in">
+        <h2>Core Features</h2>
+        <p class="subtitle">Engineered for absolute performance and aesthetics.</p>
+        <div class="grid-container">
+          @for (feature of featuresList(); track feature.title) {
+            <div class="content-card">
+              <div class="card-icon">{{ feature.icon }}</div>
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.desc }}</p>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @case ('showcase') {
+      <section class="inner-page fade-in">
+        <h2>Showcase</h2>
+        <p class="subtitle">Beautiful applications powered by Nova UI.</p>
+        <div class="grid-container">
+          @for (item of showcaseList(); track item.title) {
+            <div class="content-card showcase-card">
+              <div class="showcase-visual" [style.background]="item.color"></div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.category }}</p>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @case ('docs') {
+      <section class="inner-page fade-in">
+        <h2>Quick Start</h2>
+        <p class="subtitle">Get up and running in under a minute.</p>
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="terminal-body">
+            <code>npm install -g @angular/cli</code><br><br>
+            <code>ng new nova-app --standalone</code><br><br>
+            <code>cd nova-app && ng serve</code>
+          </div>
+        </div>
+      </section>
+    }
+  }
+</main>
